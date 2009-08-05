@@ -2,7 +2,6 @@ require "test/unit"
 require "rubygems"
 require "ruby-debug"
 require "shoulda"
-# require 'autotest'
 
 $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
 
@@ -13,3 +12,11 @@ begin
 rescue LoadError
 end
 
+
+module FileHelper
+  def fixtures
+    {
+      :csv_file => File.dirname(__FILE__) + "/../fixtures/csv_file.csv"
+    }
+  end
+end

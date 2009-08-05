@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + "/test_helper.rb"
 
-class DatapointTest < Test::Unit::TestCase
+class TimeSeries::DatapointTest < Test::Unit::TestCase
   context "a valid Datapoint" do
     setup do
-      @datapoint = Datapoint.new(DateTime.now, 1)
+      @datapoint = TimeSeries::Datapoint.new(DateTime.now, 1)
     end
     
     should "have a date" do
