@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + "/test_helper.rb"
 
 class TimeSeriesTest < Test::Unit::TestCase
+  include FileHelper
   context "a valid TimeSeries instance" do
     setup do
       @timeseries = TimeSeries.new("../fixtures/csv_file.csv")
@@ -31,6 +32,16 @@ class TimeSeriesTest < Test::Unit::TestCase
 #        assert !@series.datapoints.empty?
 #      end
 #    end
+
+    context "new_from_csv" do
+      setup do
+        @series = TimeSeries.new_from_csv(fixtures[:csv_file])
+      end
+
+      should "return a new TimeSeries instance" do
+        assert_instance_of TimeSeries, @series 
+      end
+    end
   end
 
   context "instance methods" do

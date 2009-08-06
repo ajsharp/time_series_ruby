@@ -6,31 +6,18 @@ class TimeSeries
     class CSV < TimeSeries::Importer
       include TimeSeries::Importers::AbstractImporter
 
-      def initialize(filename)
-        @file_name = filename
-        @file_type = 'csv'
-        @raw_data = process_file
-      end
-    
-      def import!
-        csv_table = FasterCSV.table(@file_name)
-        series.headers = csv_table.headers
-        csv_table.each { |p| series.add_datapoint(TimeSeries::Datapoint.new(p[0], p[1])) }
-        series
-      end
-
       def process_file
-        FasterCSV.table(@file_name)
+        @raw_data = FasterCSV.readlines(@file_name)
       end
 
       # Returns an array of Datapoint object
       def extract_datapoints
-        @raw_data.each { |row| [row[0], row[1]] }
+        @datapoints = @raw_data.collect { |r| TimeSeries::Datapoint.new(r[0], r[1]) }
       end
 
       # This method is expected to return an Array of headers
       def extract_headers
-        @raw_data.headers
+        @headers = @raw_data.shift
       end
     
     end
