@@ -22,28 +22,6 @@ class TimeSeriesTest < Test::Unit::TestCase
     end
   end # end of a valid TimeSeries
 
-  context "class methods" do
-#    context "new_from_file" do
-#      setup do
-#        @series = TimeSeries.new(File.dirname(__FILE__) + "/../fixtures/csv_file.csv")
-#      end
-#
-#      should "load the data from the file passed in" do
-#        assert !@series.datapoints.empty?
-#      end
-#    end
-
-    context "new_from_csv" do
-      setup do
-        @series = TimeSeries.new_from_csv(fixtures[:csv_file])
-      end
-
-      should "return a new TimeSeries instance" do
-        assert_instance_of TimeSeries, @series 
-      end
-    end
-  end
-
   context "instance methods" do
     context "add_datapoint" do
       setup do
@@ -71,5 +49,22 @@ class TimeSeriesTest < Test::Unit::TestCase
       end
     end # end of add_datapoints
   end # end of instance methods
+
+  context "creating a new dataset via a CSV import" do
+    setup do
+      @series = TimeSeries.new
+      assert @series.datapoints.empty?
+      @series.import!(fixtures[:csv_file])
+    end
+
+    should "populate the :datapoints array with the data from the CSV file" do
+      assert !@series.datapoints.empty?
+    end
+
+    should "create the first datapoint with the data in the first data row of the fixtures file" do
+      assert_equal @series.datapoints.first.date, "2009/01/01"
+      assert_equal @series.datapoints.first.value.to_f, 12.5
+    end
+  end
   
 end
