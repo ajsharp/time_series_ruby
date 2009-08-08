@@ -16,7 +16,8 @@ end
 module FileHelper
   def fixtures
     {
-      :csv_file => File.dirname(__FILE__) + "/../fixtures/csv_file.csv"
+      :csv_file => File.dirname(__FILE__) + "/../fixtures/csv_file.csv",
+      :xml => File.dirname(__FILE__) + "/../fixtures/xml_file.xml"
     }
   end
 end
