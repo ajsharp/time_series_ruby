@@ -3,8 +3,7 @@ require 'fastercsv'
 class TimeSeries
   module Importers
   
-    class CSV < TimeSeries::Import
-      include TimeSeries::Importers::AbstractImporter
+    class CSV
 
       def self.import!(file_name, context)
         raw_data = FasterCSV.readlines(file_name)
