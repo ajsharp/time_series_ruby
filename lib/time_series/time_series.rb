@@ -17,20 +17,10 @@ class TimeSeries
     points.each { |point| add_datapoint(point) } 
   end
 
-  class << self
-    def new_from_file(filename, opts = {})
-      options = DEFAULT_OPTIONS.merge(opts)
-      TimeSeries.new(options[:name], points)
-    end
-
-    def new_from_csv(filename, opts = {})
-      import = TimeSeries::Importers::CSV.new(filename)
-
-      options = DEFAULT_OPTIONS.merge(opts)
-      series = TimeSeries.new(options[:name])
-      series.add_datapoints(import.datapoints)
-      series
-    end
+  def import!(file_name)
+    import = TimeSeries::Import.new(file_name)
+    import.import!(self)
   end
+
   
 end
