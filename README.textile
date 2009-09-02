@@ -1,0 +1,7 @@
+This is a very simple time series data analysis tool.
+
+
+Planned Features:
+* Excel import
+* Persistent memory store integration (probably via memcached)
+* Document-based database store (via MongoDB or CouchDB)
